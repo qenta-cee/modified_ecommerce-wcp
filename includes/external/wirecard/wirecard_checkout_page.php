@@ -1019,7 +1019,7 @@ class wirecard_checkout_page {
     {
         $sql = 'SELECT zone_code FROM ' . TABLE_ZONES . ' WHERE zone_name=\'' .$zoneName .'\' LIMIT 1;';
         $result = xtc_db_query($sql);
-        $resultRow = mysql_fetch_row($result);
+        $resultRow = $result->fetch_row();
         return $resultRow[0];
     }
 
