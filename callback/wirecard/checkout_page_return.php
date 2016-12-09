@@ -27,6 +27,8 @@
     chdir('../../');
     require_once('includes/external/wirecard/wirecard_checkout_page.php');
     require_once('includes/application_top.php');
+    require_once ('lang/'. $_SESSION["language"] .'/modules/payment/wirecard_checkout_page.php');
+
 
     $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', true, false);
 
@@ -35,11 +37,9 @@
     {
          $formFields .= '<input type="hidden" name="' . htmlentities($param, ENT_COMPAT, 'UTF-8') . '" value="' . htmlentities($value, ENT_COMPAT, 'UTF-8') . '" />';
     }
-
-    $redirectText = $_SESSION['wirecard_checkout_page']['paypage_redirecttext'];
 ?>
 <form action="<?php echo $redirectUrl; ?>" method="post" target="_parent" name="wirecardCheckoutPageReturn">
-    <?php echo $redirectText; ?>
+    <?php echo MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_REDIRECTTEXT; ?>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td align="right">
