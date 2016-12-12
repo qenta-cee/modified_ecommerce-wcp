@@ -113,6 +113,8 @@
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_ID_DESC','Bestellungen, welche mit diesem Modul gemacht werden, auf diesen Status setzen.');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_PENDING_ID_TITLE','Bestellstatus für ausstehende Zahlungen festlegen');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_PENDING_ID_DESC','Bestellungen, welche mit diesem Modul gemacht werden und im Bezahlstatus pending sind, auf diesen Status setzen.');
+  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PENDING_TITLE', 'Ihre Zahlung wurde vom Finanzinstitut noch nicht best&auml;tigt');
+  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PENDING_DESC', 'Die Zahlungsbest&auml;tigung ist ausst&auml;ndig, sie wird sp&auml;ter zugesendet.');
 
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PAYMENT_TITLE', 'Bezahlvorgang');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_REDIRECTTEXT', 'Sie werden in k&uuml;rze Weitergeleitet. Wenn nicht dr&uuml;cken sie bitte auf den Button mit der Aufschrift "Weiter"');

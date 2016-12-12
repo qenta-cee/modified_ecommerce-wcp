@@ -113,6 +113,8 @@
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_ID_DESC','Set the status of orders made with this payment module to this value.');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_PENDING_ID_TITLE','Set Order Status Pending');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_ORDER_STATUS_PENDING_ID_DESC','Set the status of orders made with this payment module, which are in paymentstate pending.');
+  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PENDING_TITLE', 'The financial institution has not yet approved your payment');
+  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PENDING_DESC', 'Payment verification is pending, confirmation will be sent later.');
 
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PAYMENT_TITLE', 'Payment process.');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_REDIRECTTEXT', 'You will be redirected soon. If not please press continue.');
