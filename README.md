@@ -1,8 +1,8 @@
 # Wirecard Checkout Page plugin for modified eCommerce
 
 [![License](https://img.shields.io/badge/license-GPLv2-blue.svg)](https://raw.githubusercontent.com/wirecard/modified_ecommerce-wcp/master/LICENSE)
-[![modified eCommerce](https://img.shields.io/badge/modified_eCommerce-v1.06-green.svg)](http://www.modified-shop.org/)
-[![PHP v5.3](https://img.shields.io/badge/php-v5.3-yellow.svg)](http://www.php.net)
+[![modified eCommerce](https://img.shields.io/badge/modified_eCommerce-v2.0.1.0-green.svg)](http://www.modified-shop.org/)
+[![PHP v5.6](https://img.shields.io/badge/php-v5.6-yellow.svg)](http://www.php.net)
 
 Wirecard Checkout Page plugin for modified eCommerce. 
 
@@ -27,4 +27,3 @@ Wirecard Checkout Page offers:
 - Web interface for managing payments (approvals, cancelations, credits, etc.).
 - Benefit from Wirecard Bank´s license to conclude credit card acceptance contracts (acquiring) and issue credit cards.
 - With Wirecard Collecting only a single contract is required for payouts within various payment methods.
-- Support of recurring payments (subscriptions, one-click checkout).

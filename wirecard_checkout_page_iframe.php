@@ -25,6 +25,7 @@
  */
 
 include ('includes/application_top.php');
+require_once ('lang/'. $_SESSION["language"] .'/modules/payment/wirecard_checkout_page.php');
 
 // create smarty elements
 $smarty = new Smarty;
@@ -78,7 +79,7 @@ if (is_array($payment_modules->modules)) {
     $payment_button .= $payment_modules->process_button();
 }
 $smarty->assign('MODULE_BUTTONS', $payment_button);
-$smarty->assign('REDIRECT_TEXT', $_SESSION['wirecard_checkout_page']['paypage_redirecttext']);
+$smarty->assign('REDIRECT_TEXT', MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_REDIRECTTEXT);
 $smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONFIRM_ORDER).'</form>'."\n");
 
 $smarty->assign('language', $_SESSION['language']);
