@@ -30,7 +30,7 @@
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PENDING', 'callback/wirecard/checkout_page_pending.php');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_INITIATION_URL','https://checkout.wirecard.com/page/init.php');
   define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_IFRAME','checkout_wirecard_checkout_page.php');
-  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PLUGINVERSION', '1.1.3');
+  define('MODULE_PAYMENT_WIRECARD_CHECKOUT_PAGE_PLUGINVERSION', '1.2.0');
 
 class wirecard_checkout_page {
     var $code, $title, $description, $enabled, $transaction_id;
