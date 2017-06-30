@@ -25,8 +25,8 @@
  */
 
     chdir('../../');
-    require_once('includes/external/wirecard/wirecard_checkout_page.php');
     require_once('includes/application_top.php');
+    require_once('includes/external/wirecardcheckoutpage/Page.php');
 
-    $plugin = new wirecard_checkout_page;
-    $plugin->processConfirm();
+    $plugin = new WirecardCheckoutPage();
+    $plugin->confirm();
