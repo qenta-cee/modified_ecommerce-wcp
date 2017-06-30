@@ -101,7 +101,7 @@ class WirecardCheckoutPagePayment
         $this->_logo = ($this->_logoFilename) ? '<img src="' . DIR_WS_EXTERNAL . 'wirecardcheckoutpage/images/paymenttypes/' . $this->_logoFilename
             . '" alt="'
             . htmlspecialchars($this->constant("MODULE_PAYMENT_{$c}_TEXT_TITLE"))
-            . ' Logo" width="' . $this->_logoWidth . '"/>&nbsp;&nbsp;' : '';
+            . ' Logo" style="max-width:' . $this->_logoWidth . '"/>&nbsp;&nbsp;' : '';
 
         $this->title = $this->_logo . $this->title;
         $this->title_frontend = $this->_logo . $this->title_checkout;
