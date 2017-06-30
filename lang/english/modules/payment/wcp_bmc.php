@@ -30,6 +30,6 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-define('MODULE_PAYMENT_WCP_BMC_TEXT_TITLE', 'Bancontact/Mister Cash');
-define('MODULE_PAYMENT_WCP_BMC_TITLE', 'Wirecard Checkout Page Bancontact/Mister Cash');
+define('MODULE_PAYMENT_WCP_BMC_TEXT_TITLE', 'Bancontact');
+define('MODULE_PAYMENT_WCP_BMC_TITLE', 'Wirecard Checkout Page Bancontact');
 
