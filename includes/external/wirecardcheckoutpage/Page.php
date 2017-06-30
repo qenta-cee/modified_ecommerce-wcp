@@ -580,12 +580,6 @@ class WirecardCheckoutPage
 
         $init = new WirecardCEE_QPay_FrontendClient($this->_getConfigArray());
 
-
-        $init->setPluginVersion($this->getPluginVersion());
-
-        $init->setConfirmUrl(xtc_href_link('callback/wirecard/checkout_page_confirm.php', '', 'SSL', false));
-        $init->setOrderReference(sprintf('%010d', $order->info['orders_id']));
-
         if ($this->getConfigValue('sendconfirmationemail')) {
             $init->setConfirmMail(STORE_OWNER_EMAIL_ADDRESS);
         }
@@ -605,6 +599,9 @@ class WirecardCheckoutPage
             ->setCurrency($order->info['currency'])
             ->setPaymentType($payment->getPaymentType())
             ->setOrderDescription($this->getUserDescription($order))
+            ->setPluginVersion($this->getPluginVersion())
+            ->setConfirmUrl(xtc_href_link('callback/wirecard/checkout_page_confirm.php', '', 'SSL', false))
+            ->setOrderReference(sprintf('asd%010d', $order->info['orders_id']))
             ->setSuccessUrl($returnUrl)
             ->setPendingUrl($returnUrl)
             ->setCancelUrl($returnUrl)
