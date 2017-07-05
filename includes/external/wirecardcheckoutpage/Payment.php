@@ -382,6 +382,19 @@ class WirecardCheckoutPagePayment
      */
     public function install()
     {
+        $admin_files = array(
+            'wirecardcheckoutpage_config.php',
+            'wirecardcheckoutpage_support.php',
+            'wirecardcheckoutpage_tx.php'
+        );
+
+        foreach ($admin_files as $admin_file) {
+            $admin_include_file = DIR_FS_DOCUMENT_ROOT . DIRECTORY_SEPARATOR . "_ADMIN_INCLUDES_" . DIRECTORY_SEPARATOR . $admin_file;
+            if (file_exists($admin_include_file)) {
+                rename($admin_include_file, DIR_FS_ADMIN . $admin_file);
+            }
+        }
+
         $config = $this->_configuration();
         $sort_order = 0;
         foreach ($config as $key => $data) {
@@ -422,6 +435,8 @@ class WirecardCheckoutPagePayment
             'wirecardcheckoutpage_config',
             'wirecardcheckoutpage_tx'
         );
+
+
         foreach ($fields as $f) {
             $check_query = xtc_db_query('SHOW COLUMNS FROM admin_access like "' . $f . '"');
             if (xtc_db_num_rows($check_query) == 0) {
