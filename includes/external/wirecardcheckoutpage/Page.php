@@ -970,9 +970,14 @@ class WirecardCheckoutPage
             $item = new WirecardCEE_Stdlib_Basket_Item('shipping');
             $item->setDescription($order->info['shipping_method'])
                 ->setName('Shipping')
-                ->setUnitGrossAmount(number_format($order->info['pp_shipping'], $decimalPlaces, '.', ''))
-                ->setUnitNetAmount(number_format($order->info['pp_tax'], $decimalPlaces, '.', ''))
-                ->setUnitTaxAmount($item->getUnitGrossAmount() - $item->getUnitNetAmount())
+                ->setUnitGrossAmount(number_format($order->info['pp_shipping'],
+                    $decimalPlaces, '.', ''))
+                ->setUnitNetAmount(number_format($order->info['pp_shipping'],
+                        $decimalPlaces, '.',
+                        '') - number_format($order->info['pp_tax'],
+                        $decimalPlaces, '.', ''))
+                ->setUnitTaxAmount(number_format($order->info['pp_tax'],
+                    $decimalPlaces, '.', ''))
                 ->setUnitTaxRate(number_format($shipping_tax_rate, 3, '.', ''));
 
             $basket->addItem($item);
