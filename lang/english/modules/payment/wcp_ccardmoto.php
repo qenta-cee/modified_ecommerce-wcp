@@ -30,37 +30,10 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-
-chdir('../../');
-include('includes/application_top.php');
-
-require_once('includes/external/wirecardcheckoutpage/Page.php');
-
-$plugin = new WirecardCheckoutPage();
-$redirectUrl = $plugin->back();
-
-if (!strlen($redirectUrl)) {
-    $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL', true, false);
-}
-
-$smarty = new Smarty;
-$smarty->assign('language', $_SESSION['language']);
-
-require(DIR_WS_INCLUDES . 'header.php');
-
-echo "<h3>" . $plugin->getText('redirection_header') . "</h3>";
-echo "<p>" . $plugin->getText('redirection_text') . "<a href='". $redirectUrl ."' target='_parent'>" . $plugin->getText('redirection_here') . "</a></p>";
-printf(<<<HTML
-<script type="text/javascript">
-	function iframeBreakout()
-    {
-		parent.location.href = %s;
-    }
-    iframeBreakout();
-</script>
-
-
-HTML
-    , json_encode($redirectUrl));
-
-require('includes/application_bottom.php');
+define('MODULE_PAYMENT_WCP_CCARDMOTO_TEXT_TITLE',
+    'Credit Card - Mail Order and Telephone Order');
+define('MODULE_PAYMENT_WCP_CCARDMOTO_TITLE',
+    'Wirecard Checkout Page Credit Card - Mail Order and Telephone Order');
+define('MODULE_PAYMENT_WCP_CCARDMOTO_USERGROUP_TITLE', 'Allowed usergroup');
+define('MODULE_PAYMENT_WCP_CCARDMOTO_USERGROUP_DESC',
+    'Credit Card - Mail Order and Telephone Order payment method must never be offered to the consumers in your online shop.<br/> <a href="https://guides.wirecard.at/payment_methods:ccard_moto:start" target="_blank">More information</a>');

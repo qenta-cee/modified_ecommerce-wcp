@@ -30,37 +30,50 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+require_once(DIR_FS_EXTERNAL . 'wirecardcheckoutpage/Payment.php');
 
-chdir('../../');
-include('includes/application_top.php');
+class wcp_eps extends WirecardCheckoutPagePayment
+{
+    protected $_defaultSortOrder = 70;
+    protected $_paymenttype = WirecardCEE_Stdlib_PaymentTypeAbstract::EPS;
+    protected $_logoFilename = 'eps.png';
+    protected $_sendFinancialInstitution = true;
 
-require_once('includes/external/wirecardcheckoutpage/Page.php');
-
-$plugin = new WirecardCheckoutPage();
-$redirectUrl = $plugin->back();
-
-if (!strlen($redirectUrl)) {
-    $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL', true, false);
-}
-
-$smarty = new Smarty;
-$smarty->assign('language', $_SESSION['language']);
-
-require(DIR_WS_INCLUDES . 'header.php');
-
-echo "<h3>" . $plugin->getText('redirection_header') . "</h3>";
-echo "<p>" . $plugin->getText('redirection_text') . "<a href='". $redirectUrl ."' target='_parent'>" . $plugin->getText('redirection_here') . "</a></p>";
-printf(<<<HTML
-<script type="text/javascript">
-	function iframeBreakout()
+    /**
+     * display additional input fields on payment page
+     *
+     * @return array|bool
+     */
+    function selection()
     {
-		parent.location.href = %s;
+        $content = parent::selection();
+        if ($content === false) {
+            return false;
+        }
+        $field = '<select class="wcp_eps input-select mandatory" data-wcp-fieldname="fi" name="wcp_eps_financialinstitution">';
+
+        $field .= sprintf('<option value="">%s</option>', $this->_page->getText('CHOOSE_FINANCIALINSTITUTION'));
+
+        foreach (WirecardCEE_QPay_PaymentType::getFinancialInstitutions($this->_paymenttype) as $value => $name) {
+            $field .= sprintf('<option value="%s">%s</option>', htmlspecialchars($value), $name);
+        }
+
+        $field .= '</select>';
+        $content['fields'][] = array(
+            'title' => $this->_page->getText('financialinstitution'),
+            'field' => $field
+        );
+
+        return $content;
     }
-    iframeBreakout();
-</script>
 
-
-HTML
-    , json_encode($redirectUrl));
-
-require('includes/application_bottom.php');
+    /**
+     * save additional info to session
+     */
+    public function pre_confirmation_check()
+    {
+        if (isset($_POST['wcp_eps_financialinstitution'])) {
+            $_SESSION['wcp_financialinstitution'] = $_POST['wcp_eps_financialinstitution'];
+        }
+    }
+}

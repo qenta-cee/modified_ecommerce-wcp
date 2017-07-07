@@ -30,37 +30,22 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 
-chdir('../../');
-include('includes/application_top.php');
-
-require_once('includes/external/wirecardcheckoutpage/Page.php');
-
-$plugin = new WirecardCheckoutPage();
-$redirectUrl = $plugin->back();
-
-if (!strlen($redirectUrl)) {
-    $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL', true, false);
-}
-
-$smarty = new Smarty;
-$smarty->assign('language', $_SESSION['language']);
-
-require(DIR_WS_INCLUDES . 'header.php');
-
-echo "<h3>" . $plugin->getText('redirection_header') . "</h3>";
-echo "<p>" . $plugin->getText('redirection_text') . "<a href='". $redirectUrl ."' target='_parent'>" . $plugin->getText('redirection_here') . "</a></p>";
-printf(<<<HTML
-<script type="text/javascript">
-	function iframeBreakout()
-    {
-		parent.location.href = %s;
+?>
+<div class="clear configPartner cf" style="border-bottom: none;">
+    <?php
+    if (isset($admin_access['wirecardcheckoutpage_tx']) && $admin_access['wirecardcheckoutpage_tx'] == '1') {
+        echo '<a class="configtab' . (((basename($PHP_SELF) == 'wirecardcheckoutpage_tx.php') ? ' activ' : '') ? ' activ' : '') . '" href="' . xtc_href_link('wirecardcheckoutpage_tx.php',
+                '', 'NONSSL') . '">' . TEXT_WIRECARDCHECKOUTPAGE_TAB_TX . '</a>';
     }
-    iframeBreakout();
-</script>
-
-
-HTML
-    , json_encode($redirectUrl));
-
-require('includes/application_bottom.php');
+    if (isset($admin_access['wirecardcheckoutpage_config']) && $admin_access['wirecardcheckoutpage_config'] == '1') {
+        echo '<a class="configtab' . ((basename($PHP_SELF) == 'wirecardcheckoutpage_config.php') ? ' activ' : '') . '" href="' . xtc_href_link('wirecardcheckoutpage_config.php',
+                '', 'NONSSL') . '">' . TEXT_WIRECARDCHECKOUTPAGE_TAB_CONFIG . '</a>';
+    }
+    if (isset($admin_access['wirecardcheckoutpage_support']) && $admin_access['wirecardcheckoutpage_support'] == '1') {
+        echo '<a class="configtab' . (((basename($PHP_SELF) == 'wirecardcheckoutpage_support.php') ? ' activ' : '') ? ' activ' : '') . '" href="' . xtc_href_link('wirecardcheckoutpage_support.php',
+                '', 'NONSSL') . '">' . TEXT_WIRECARDCHECKOUTPAGE_TAB_SUPPORT . '</a>';
+    }
+    ?>
+</div>

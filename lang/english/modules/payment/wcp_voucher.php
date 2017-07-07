@@ -30,37 +30,6 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+define('MODULE_PAYMENT_WCP_VOUCHER_TEXT_TITLE', 'My Voucher');
+define('MODULE_PAYMENT_WCP_VOUCHER_TITLE', 'Wirecard Checkout Page My Voucher');
 
-chdir('../../');
-include('includes/application_top.php');
-
-require_once('includes/external/wirecardcheckoutpage/Page.php');
-
-$plugin = new WirecardCheckoutPage();
-$redirectUrl = $plugin->back();
-
-if (!strlen($redirectUrl)) {
-    $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL', true, false);
-}
-
-$smarty = new Smarty;
-$smarty->assign('language', $_SESSION['language']);
-
-require(DIR_WS_INCLUDES . 'header.php');
-
-echo "<h3>" . $plugin->getText('redirection_header') . "</h3>";
-echo "<p>" . $plugin->getText('redirection_text') . "<a href='". $redirectUrl ."' target='_parent'>" . $plugin->getText('redirection_here') . "</a></p>";
-printf(<<<HTML
-<script type="text/javascript">
-	function iframeBreakout()
-    {
-		parent.location.href = %s;
-    }
-    iframeBreakout();
-</script>
-
-
-HTML
-    , json_encode($redirectUrl));
-
-require('includes/application_bottom.php');

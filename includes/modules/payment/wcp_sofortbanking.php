@@ -30,37 +30,19 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+require_once(DIR_FS_EXTERNAL . 'wirecardcheckoutpage/Payment.php');
 
-chdir('../../');
-include('includes/application_top.php');
+class wcp_sofortbanking extends WirecardCheckoutPagePayment
+{
+    protected $_defaultSortOrder = 30;
+    protected $_paymenttype = WirecardCEE_Stdlib_PaymentTypeAbstract::SOFORTUEBERWEISUNG;
+    protected $_logoFilename = 'sofortbanking-%s.png';
 
-require_once('includes/external/wirecardcheckoutpage/Page.php');
-
-$plugin = new WirecardCheckoutPage();
-$redirectUrl = $plugin->back();
-
-if (!strlen($redirectUrl)) {
-    $redirectUrl = xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL', true, false);
-}
-
-$smarty = new Smarty;
-$smarty->assign('language', $_SESSION['language']);
-
-require(DIR_WS_INCLUDES . 'header.php');
-
-echo "<h3>" . $plugin->getText('redirection_header') . "</h3>";
-echo "<p>" . $plugin->getText('redirection_text') . "<a href='". $redirectUrl ."' target='_parent'>" . $plugin->getText('redirection_here') . "</a></p>";
-printf(<<<HTML
-<script type="text/javascript">
-	function iframeBreakout()
+    public function __construct()
     {
-		parent.location.href = %s;
+        $lang = $_SESSION['language_code'];
+        $this->_logoFilename = sprintf($this->_logoFilename, $lang);
+
+        parent::__construct();
     }
-    iframeBreakout();
-</script>
-
-
-HTML
-    , json_encode($redirectUrl));
-
-require('includes/application_bottom.php');
+}
