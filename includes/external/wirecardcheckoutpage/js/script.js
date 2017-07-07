@@ -79,7 +79,7 @@ $(function () {
         var paymenttype = $('#' + code + '_paymenttype').val();
         var messagebox = $('#' + code + '_messagebox');
 
-        messagebox.empty();
+        messagebox.fadeOut('fast').empty();
         // not a wirecard payment
         if (!paymenttype)
             return true;
