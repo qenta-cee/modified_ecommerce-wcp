@@ -74,12 +74,13 @@ $(function () {
 
     var paymentform = $('#checkout_payment');
     paymentform.find('.button_right input').on('click', function (evt) {
-        var code = paymentform.find("input[name='payment']:checked").val();
+        var code = paymentform.find("input[name='payment'][value^=wcp_]:checked").val();
 
         var paymenttype = $('#' + code + '_paymenttype').val();
         var messagebox = $('#' + code + '_messagebox');
 
-        messagebox.fadeOut('fast').empty();
+        messagebox.empty();
+        messagebox.hide();
         // not a wirecard payment
         if (!paymenttype)
             return true;
