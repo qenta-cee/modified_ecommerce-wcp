@@ -611,6 +611,10 @@ class WirecardCheckoutPage
             ->setConsumerData($this->getConsumerData($order, $payment))
             ->createConsumerMerchantCrmId($order->customer['email_address']);
 
+        if (isset($_SESSION['wcp-consumerDeviceId'])) {
+        	$init->consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
+        	unset($_SESSION['wcp-consumerDeviceId']);
+        }
         $init->modifiedWcpTxid = $txId;
 
         if ($payment->forceSendingBasket() || $this->getConfigValue('send_basketinformation')) {
