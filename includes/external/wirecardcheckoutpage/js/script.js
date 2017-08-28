@@ -69,7 +69,7 @@ $(function () {
         }
 
         var limit = new Date((today.getFullYear() - 18), today.getMonth(), today.getDate());
-        return birthdate < limit;
+        return birthdate <= limit;
     };
 
     var paymentform = $('#checkout_payment');
