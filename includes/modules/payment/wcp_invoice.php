@@ -38,6 +38,7 @@ class wcp_invoice extends WirecardCheckoutPagePayment
     protected $_paymenttype = WirecardCEE_Stdlib_PaymentTypeAbstract::INVOICE;
     protected $_logoFilename = 'invoice.png';
     protected $_b2b = false;
+    protected $_forceSendAdditionalData = true;
 
     /**
      * display additional input fields on payment page
@@ -194,7 +195,10 @@ HTML;
      */
     public function forceSendingBasket()
     {
-        return true;
+    	if ( $this->getConfigParam("PROVIDER") != 'payolution' ) {
+    		return true;
+	    }
+        return false;
     }
 
     /**

@@ -37,6 +37,7 @@ class wcp_installment extends WirecardCheckoutPagePayment
     protected $_defaultSortOrder = 210;
     protected $_paymenttype = WirecardCEE_Stdlib_PaymentTypeAbstract::INSTALLMENT;
     protected $_logoFilename = 'installment.png';
+	protected $_forceSendAdditionalData = true;
 
     /**
      * display additional input fields on payment page
@@ -66,18 +67,50 @@ class wcp_installment extends WirecardCheckoutPagePayment
             );
         }
 
-        $customer_id = $_SESSION['customer_id'];
+	    $customer_id = $_SESSION['customer_id'];
 
-        $dob = $this->getCustomerDob($customer_id);
+	    $dob = $this->getCustomerDob($customer_id);
 
-        $field = sprintf('<input type="text" class="wcp_installment birthday mandatory" maxlength="10" data-wcp-fieldname="birthday" name="wcp_installment_birthday" value="%s">',
-            $dob === null ? '' : $dob->format('m.d.Y'));
+	    $days_range = range(1,31);
+	    $months_range = range(1,12);
+	    $years_range = array_reverse(range(date("Y")-100, date("Y")));
 
-        $jsMinage = json_encode($this->getMinAge());
-        $jsCode = json_encode($this->code);
-        $jsMessage = json_encode($this->_page->getText('MIN_AGE_MESSAGE', $jsMinage));
-        $jsHasConsent = json_encode($hasConsent);
-        $jsConsentMessage = json_encode($this->_page->getText('CONSENT_MSG'));
+	    $days = "<option value=''></option>";
+	    $months = "<option value=''></option>";
+	    $years = "<option value=''></option>";
+
+	    foreach($days_range as $day){
+		    $days .= "<option value='$day'";
+		    if($dob !== null && $day==$dob->format("d"))
+			    $days = " selected='selected'";
+		    $days .= ">$day</option>";
+	    }
+
+	    foreach($months_range as $month){
+		    $months .= "<option value='$month'";
+		    if($dob !== null && $month==$dob->format("m"))
+			    $months = " selected='selected'";
+		    $months .= ">$month</option>";
+	    }
+
+	    foreach($years_range as $year){
+		    $years .= "<option value='$year'";
+		    if($dob !== null && $year==$dob->format("Y"))
+			    $years = " selected='selected'";
+		    $years .= ">$year</option>";
+	    }
+
+	    $field = "<select style='width:auto;' name='wcp_installment_birthday_day' class='mandatory'>$days</select>";
+
+	    $field .= "<select style='width:auto;' name='wcp_installment_birthday_month' class='mandatory'>$months</select>";
+
+	    $field .= "<select style='width:auto;' name='wcp_installment_birthday_year' class='mandatory'>$years</select>";
+
+	    $jsMinage = json_encode($this->getMinAge());
+	    $jsCode = json_encode($this->code);
+	    $jsMessage = json_encode($this->_page->getText('MIN_AGE_MESSAGE', $jsMinage));
+	    $jsHasConsent = json_encode($hasConsent);
+	    $jsConsentMessage = json_encode($this->_page->getText('CONSENT_MSG'));
 
         $field .= <<<HTML
         <script type="text/javascript">
@@ -86,13 +119,15 @@ class wcp_installment extends WirecardCheckoutPagePayment
             $.fn.wcpValidateInstallment = function (messageBox) {
                 
                 var paymentCode = $jsCode;
-                var dateStr = this.find('.' + paymentCode + '.birthday').val();
-                var minAge = $jsMinage;
+                
+                var day = this.find('select[name="' + paymentCode + '_birthday_day"] option:selected').val(),
+                month = this.find('select[name="' + paymentCode + '_birthday_month"] option:selected').val(),
+                year = this.find('select[name="' + paymentCode + '_birthday_year"] option:selected').val();
+                
+                var dateStr = year+"-"+month+"-"+day;
                 var msg = '';
-    
-                dateStr = dateStr.replace(/[.-]/g, '/');
                     
-                if (!wcpValidateMinAge(dateStr, minAge)) {
+                if (!wcpValidateMinAge(dateStr)) {
                     msg = $jsMessage;
                     messageBox.append('<p>' + msg + '</p>');
                 }
@@ -157,7 +192,10 @@ HTML;
      */
     public function forceSendingBasket()
     {
-        return true;
+	    if ( $this->getConfigParam("PROVIDER") != 'payolution' ) {
+		    return true;
+	    }
+	    return false;
     }
 
     /**
