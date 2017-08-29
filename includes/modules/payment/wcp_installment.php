@@ -132,7 +132,6 @@ HTML;
         if (isset($_POST['wcp_installment_birthday'])) {
             $_SESSION['wcp_birthday'] = $_POST['wcp_installment_birthday'];
         }
-	    parent::pre_confirmation_check();
     }
 
     /**
