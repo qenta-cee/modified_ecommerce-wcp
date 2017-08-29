@@ -281,6 +281,7 @@ class WirecardCheckoutPagePayment
         }
         $info = $this->_logo;
         $info .= sprintf('<div class="errormessage" style="display: none;" id="%s_messagebox"></div>', $this->code);
+        $info .= include_once DIR_FS_EXTERNAL . 'wirecardcheckoutpage/includes/ratepay.php';
         $c = strtoupper($this->code);
 
         unset($_SESSION['wcp_financialinstitution']);

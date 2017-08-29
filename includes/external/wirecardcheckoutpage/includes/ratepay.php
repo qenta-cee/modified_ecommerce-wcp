@@ -30,35 +30,20 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
+$page = new WirecardCheckoutPage();
+$config = $page->_getConfigArray();
+$customer_id = $config['CUSTOMER_ID'];
 
-/**
- * @name WirecardCEE_QMore_Module
- * @category WirecardCEE
- * @package WirecardCEE_QMore
- * @subpackage Module
- */
-class WirecardCEE_QMore_Module extends WirecardCEE_Stdlib_Module_ModuleAbstract implements WirecardCEE_Stdlib_Module_ModuleInterface
-{
-
-    /**
-     * Returns the user configuration details found in 'Config' directory
-     * (user.config.php)
-     *
-     * @return Array
-     */
-    public static final function getConfig()
-    {
-        return include dirname(__FILE__) . '/Config/user.config.php';
-    }
-
-    /**
-     * Returns the client configuration details found in 'Config' directory
-     * (client.config.php)
-     *
-     * @return Array
-     */
-    public static final function getClientConfig()
-    {
-        return include dirname(__FILE__) . '/Config/client.config.php';
-    }
+if( isset( $_SESSION['wcp-consumerDeviceId'] ) ) {
+	$consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
+} else {
+	$timestamp = microtime();
+	$consumerDeviceId = md5( $customer_id . "_" . $timestamp );
+	$_SESSION['wcp-consumerDeviceId'] = $consumerDeviceId;
 }
+$ratepay = '<script language="JavaScript">var di = {t:"' . $consumerDeviceId . '",v:"WDWL",l:"Checkout"};</script>';
+$ratepay .= '<script type="text/javascript" src="//d.ratepay.com/' . $consumerDeviceId . '/di.js"></script>';
+$ratepay .= '<noscript><link rel="stylesheet" type="text/css" href="//d.ratepay.com/di.css?t=' . $consumerDeviceId . '&v=WDWL&l=Checkout"></noscript>';
+$ratepay .= '<object type="application/x-shockwave-flash" data="//d.ratepay.com/WDWL/c.swf" width="0" height="0"><param name="movie" value="//d.ratepay.com/WDWL/c.swf" /><param name="flashvars" value="t=' . $consumerDeviceId . '&v=WDWL"/><param name="AllowScriptAccess" value="always"/></object>';
+
+return $ratepay;

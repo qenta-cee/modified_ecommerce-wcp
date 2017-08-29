@@ -53,7 +53,7 @@ class WirecardCheckoutPage
     /**
      * @var string
      */
-    protected $_pluginversion = '2.0.0';
+    protected $_pluginversion = '2.0.1';
 
     /**
      * available config params
@@ -611,6 +611,10 @@ class WirecardCheckoutPage
             ->setConsumerData($this->getConsumerData($order, $payment))
             ->createConsumerMerchantCrmId($order->customer['email_address']);
 
+        if (isset($_SESSION['wcp-consumerDeviceId'])) {
+        	$init->consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
+        	unset($_SESSION['wcp-consumerDeviceId']);
+        }
         $init->modifiedWcpTxid = $txId;
 
         if ($payment->forceSendingBasket() || $this->getConfigValue('send_basketinformation')) {
@@ -970,14 +974,12 @@ class WirecardCheckoutPage
             $item = new WirecardCEE_Stdlib_Basket_Item('shipping');
             $item->setDescription($order->info['shipping_method'])
                 ->setName('Shipping')
-                ->setUnitGrossAmount(number_format($order->info['pp_shipping'],
+                ->setUnitGrossAmount(number_format($order->info['pp_tax'],
                     $decimalPlaces, '.', ''))
                 ->setUnitNetAmount(number_format($order->info['pp_shipping'],
                         $decimalPlaces, '.',
-                        '') - number_format($order->info['pp_tax'],
-                        $decimalPlaces, '.', ''))
-                ->setUnitTaxAmount(number_format($order->info['pp_tax'],
-                    $decimalPlaces, '.', ''))
+                        ''))
+                ->setUnitTaxAmount($item->getUnitGrossAmount() - $item->getUnitNetAmount())
                 ->setUnitTaxRate(number_format($shipping_tax_rate, 3, '.', ''));
 
             $basket->addItem($item);
