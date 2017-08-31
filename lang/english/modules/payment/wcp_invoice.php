@@ -33,6 +33,7 @@
 define('MODULE_PAYMENT_WCP_INVOICE_TEXT_TITLE', 'Invoice');
 define('MODULE_PAYMENT_WCP_INVOICE_TITLE', 'Wirecard Checkout Page Invoice');
 define('MODULE_PAYMENT_WCP_INVOICE_PROVIDER_TITLE', 'Provider');
+define('MODULE_PAYMENT_WCP_INVOICE_PROVIDER_DESC', '');
 
 define('MODULE_PAYMENT_WCP_INVOICE_AMOUNT_MIN_TITLE', 'Order minimum amount');
 define('MODULE_PAYMENT_WCP_INVOICE_AMOUNT_MAX_TITLE', 'Order maximum amount');
@@ -44,6 +45,7 @@ define('MODULE_PAYMENT_WCP_INVOICE_SHIPPING_COUNTRIES_TITLE', 'Allowed shipping 
 define('MODULE_PAYMENT_WCP_INVOICE_SHIPPING_COUNTRIES_DESC', 'Comma separated, e.g. AT,DE');
 
 define('MODULE_PAYMENT_WCP_INVOICE_BILLINGSHIPPING_SAME_TITLE', 'Billing/shipping address must be identical');
+define('MODULE_PAYMENT_WCP_INVOICE_BILLINGSHIPPING_SAME_DESC', '');
 define('MODULE_PAYMENT_WCP_INVOICE_PAYOLUTION_MID_TITLE', 'payolution mID');
 define('MODULE_PAYMENT_WCP_INVOICE_PAYOLUTION_MID_DESC', 'Your payolution merchant ID, non-base64-encoded.');
 

@@ -38,6 +38,7 @@ class wcp_invoiceb2b extends wcp_invoice
     protected $_defaultSortOrder = 61;
     protected $_logoFilename = 'invoiceb2b.png';
     protected $_b2b = true;
+	protected $_forceSendAdditionalData = true;
 
     public function pre_confirmation_check()
     {

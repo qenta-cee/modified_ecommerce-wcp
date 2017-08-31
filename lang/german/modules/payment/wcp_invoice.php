@@ -33,6 +33,7 @@
 define('MODULE_PAYMENT_WCP_INVOICE_TEXT_TITLE', 'Kauf auf Rechnung');
 define('MODULE_PAYMENT_WCP_INVOICE_TITLE', 'Wirecard Checkout Page Kauf auf Rechnung');
 define('MODULE_PAYMENT_WCP_INVOICE_PROVIDER_TITLE', 'Provider');
+define('MODULE_PAYMENT_WCP_INVOICE_PROVIDER_DESC', '');
 
 define('MODULE_PAYMENT_WCP_INVOICE_AMOUNT_MIN_TITLE', 'Bestellung Minimalbetrag');
 define('MODULE_PAYMENT_WCP_INVOICE_AMOUNT_MAX_TITLE', 'Bestellung Maximalbetrag');
@@ -43,6 +44,7 @@ define('MODULE_PAYMENT_WCP_INVOICE_SHIPPING_COUNTRIES_TITLE', 'Erlaubte L&auml;n
 define('MODULE_PAYMENT_WCP_INVOICE_SHIPPING_COUNTRIES_DESC', 'Kommasepariert, z.B. AT,DE');
 
 define('MODULE_PAYMENT_WCP_INVOICE_BILLINGSHIPPING_SAME_TITLE', 'Rechnungs/Versandadresse m&uuml;ssen ident sein');
+define('MODULE_PAYMENT_WCP_INVOICE_BILLINGSHIPPING_SAME_DESC', '');
 define('MODULE_PAYMENT_WCP_INVOICE_PAYOLUTION_MID_TITLE', 'payolution mID');
 define('MODULE_PAYMENT_WCP_INVOICE_PAYOLUTION_MID_DESC', 'Ihre payolution H&auml;ndler ID, nicht-base64-encoded.');
 
