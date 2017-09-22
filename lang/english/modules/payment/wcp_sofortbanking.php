@@ -30,6 +30,6 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-define('MODULE_PAYMENT_WCP_SOFORTBANKING_TEXT_TITLE', 'SOFORT Banking');
-define('MODULE_PAYMENT_WCP_SOFORTBANKING_TITLE', 'Wirecard Checkout Page SOFORT Banking');
+define('MODULE_PAYMENT_WCP_SOFORTBANKING_TEXT_TITLE', '	Online bank transfer.');
+define('MODULE_PAYMENT_WCP_SOFORTBANKING_TITLE', 'Wirecard Checkout Page Online bank transfer.');
 
