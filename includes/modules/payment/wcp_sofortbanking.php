@@ -36,13 +36,5 @@ class wcp_sofortbanking extends WirecardCheckoutPagePayment
 {
     protected $_defaultSortOrder = 30;
     protected $_paymenttype = WirecardCEE_Stdlib_PaymentTypeAbstract::SOFORTUEBERWEISUNG;
-    protected $_logoFilename = 'sofortbanking-%s.png';
-
-    public function __construct()
-    {
-        $lang = $_SESSION['language_code'];
-        $this->_logoFilename = sprintf($this->_logoFilename, $lang);
-
-        parent::__construct();
-    }
+    protected $_logoFilename = 'sofortbanking.png';
 }
