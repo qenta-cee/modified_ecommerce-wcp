@@ -320,10 +320,13 @@ class WirecardCheckoutPagePayment
      */
     public function confirmation()
     {
+        if ($this->getConfigParam('PROVIDER') !== 'ratepay')
+            return;
+
 	    $config = $this->_page->_getConfigArray();
 	    $customer_id = $config['CUSTOMER_ID'];
 
-	    if( isset( $_SESSION['wcp-consumerDeviceId'] ) ) {
+	    if ( isset( $_SESSION['wcp-consumerDeviceId'] ) ) {
 		    $consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
 	    } else {
 		    $timestamp = microtime();
