@@ -53,7 +53,7 @@ class WirecardCheckoutPage
     /**
      * @var string
      */
-    protected $_pluginversion = '2.0.2';
+    protected $_pluginversion = '2.0.3';
 
     /**
      * available config params
