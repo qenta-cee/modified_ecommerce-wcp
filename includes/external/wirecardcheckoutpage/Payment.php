@@ -320,19 +320,20 @@ class WirecardCheckoutPagePayment
      */
     public function confirmation()
     {
-        if ($this->getConfigParam('PROVIDER') !== 'ratepay')
+        if ($this->getConfigParam('PROVIDER') !== 'ratepay') {
             return;
+        }
 
-	    $config = $this->_page->_getConfigArray();
-	    $customer_id = $config['CUSTOMER_ID'];
+        $config = $this->_page->_getConfigArray();
+        $customer_id = $config['CUSTOMER_ID'];
 
-	    if ( isset( $_SESSION['wcp-consumerDeviceId'] ) ) {
-		    $consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
-	    } else {
-		    $timestamp = microtime();
-		    $consumerDeviceId = md5( $customer_id . "_" . $timestamp );
-		    $_SESSION['wcp-consumerDeviceId'] = $consumerDeviceId;
-	    }
+        if (isset($_SESSION['wcp-consumerDeviceId'])) {
+            $consumerDeviceId = $_SESSION['wcp-consumerDeviceId'];
+        } else {
+            $timestamp = microtime();
+            $consumerDeviceId = md5($customer_id . "_" . $timestamp);
+            $_SESSION['wcp-consumerDeviceId'] = $consumerDeviceId;
+        }
 	    $ratepay = '<script language="JavaScript">var di = {t:"' . $consumerDeviceId . '",v:"WDWL",l:"Checkout"};</script>';
 	    $ratepay .= '<script type="text/javascript" src="//d.ratepay.com/' . $consumerDeviceId . '/di.js"></script>';
 	    $ratepay .= '<noscript><link rel="stylesheet" type="text/css" href="//d.ratepay.com/di.css?t=' . $consumerDeviceId . '&v=WDWL&l=Checkout"></noscript>';
